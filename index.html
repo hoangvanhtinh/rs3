@@ -507,10 +507,20 @@
 </body>
 
 <script>
-    const token =
-        '/rs03/2026/RST/RST_Controller2.asp?part=view&p=A878672AD8C6CEBC5E31DD302B6B52D5BFB734F44C00EBA7D1E6525E9E12888F&jubsuDate=20260202';
+    window.onload = () => {
 
-    history.replaceState({}, '', '/' + token);
+    const token = "A878672AD8C6CEBC5E31DD302B6B52D5BFB734F44C00EBA7D1E6525E9E12888F&jubsuDate=20260202";
+
+    // URL duy nhất
+    const rstURL =
+        "/rs03/2026/RST/RST_Controller2.asp?part=view&p=A" + token;
+
+    // chỉ hiển thị 1 URL này
+    history.replaceState({}, "", rstURL);
+
+    console.log("RST URL ACTIVE");
+};  
+    
     function savePDF() {
         const btn = document.querySelector(".pdf");
         btn.style.visibility = "hidden";
