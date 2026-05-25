@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>결과</title>
+    <link rel="icon" type="image/png" href="logo.png">
+
+
+
+    <!-- PDF LIB -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        @media print {
+
+            /* Ẩn toàn bộ UI không cần in */
+            .header,
+            .top-wrap,
+            .btn-group,
+            .left-menu {
+                display: none !important;
+            }
+
+            .img-2 {
+                margin-top: 10px;
+                padding-top: 30px;
+                height: 110%;
+            }
+
+            .img-0 {
+                margin-top: 25px;
+                padding-top: 25px;
+            }
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #fff;
+        }
+
+        /* HEADER */
+        .header {
+            position: relative;
+            top: 0;
+            background: #fff;
+            padding: 14px 0;
+            text-align: center;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .top-wrap {
+            width: 100%;
+            max-width: 1000px;
+            margin-left: 400px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        /* LEFT MENU */
+        .left-menu {
+            width: 160px;
+            flex-shrink: 0;
+
+
+        }
+
+        .menu-box {
+            height: 64px;
+            background: #67bddc;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            border-bottom: 1px solid #fff;
+            margin-left: -10px
+        }
+
+        .menu {
+            position: absolute;
+            left: 15px;
+            top: 14px;
+            width: 28px;
+        }
+
+        .menu div {
+            height: 4px;
+            background: #49bcd3;
+            margin: 5px 0;
+            border-radius: 2px;
+        }
+
+        .logo {
+            font-family: 5px;
+
+
+        }
+
+        .logo img {
+            height: 45px;
+            max-height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* BOX INFO */
+        .info {
+            width: 100%;
+            max-width: 900px;
+            border: 5px solid #67bddc;
+            background: #fff;
+
+            padding: 18px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+
+            position: relative;
+            margin-left: -8px;
+            height: 100px;
+            margin-top: 8px;
+            align-items: center;
+        }
+
+        .grid {
+            flex: 1;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 14px 40px;
+        }
+
+        .item {
+            font-size: 14px;
+            color: #555;
+            white-space: nowrap;
+            font-family: Times New Roman;
+        }
+
+        .item b {
+            font-weight: 400;
+            color: #666;
+        }
+
+        .value {
+            color: #1e88e5;
+            font-weight: 700;
+            font-family: 'Times New Roman';
+        }
+
+        /* BUTTON */
+
+
+        .btn-group {
+            width: 100px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 8px;
+
+            flex-shrink: 0;
+
+
+        }
+
+        .btn-group button {
+            height: 20px;
+
+            border: none;
+
+            color: #fff;
+
+            background: #1697ff;
+
+            border-radius: 5px;
+
+            font-size: 11px;
+
+            cursor: pointer;
+        }
+
+        .btn-group .pdf {
+            background: #d91c1c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+
+        /* CONTENT EXPORT */
+        #content {
+            width: 100%;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: auto;
+            background: white;
+        }
+
+        /* TITLE */
+        .title {
+            margin: 12px;
+            background: #e9f6f8;
+            border-left: 6px solid #49bcd3;
+            padding: 12px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .container {
+            text-align: center;
+            margin: 0;
+        }
+
+        .img-2 {
+            width: 100%;
+            max-width: 210mm;
+            height: auto;
+            display: block;
+
+        }
+
+        .img-0 {
+            width: 100%;
+            max-width: 210mm;
+            height: auto;
+            display: block;
+            margin-top: 0;
+        }
+
+
+        .img-3 {
+            width: 100%;
+            max-width: 210mm;
+            height: auto;
+            display: block;
+        }
+
+        .pdf-mode .img-2 {
+            margin-top: 50px;
+        }
+
+        .pdf-mode .img-0 {
+            margin-top: 25px;
+            padding-top: 25px;
+        }
+
+        .pdf-mode .img-3 {
+            margin-top: -5px;
+        }
+
+
+        @media screen {
+            .page.overlap {
+                transform: translateY(-7px);
+                position: relative;
+                z-index: 2;
+            }
+        }
+
+        #in {
+            width: 210mm;
+            height: auto;
+            margin: auto;
+            background: white;
+            display: block;
+        }
+
+
+        .page {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+
+        }
+
+        .page-break {
+            break-after: page;
+            page-break-after: always;
+        }
+
+        .noi {
+            margin: 0;
+        }
+
+
+        /* MOBILE */
+        @media(max-width:768px) {
+
+
+            body {
+                overflow-x: hidden;
+            }
+
+            .logo img {
+                height: 30px;
+            }
+
+            .page.overlap {
+                transform: translateY(-3.1px);
+                position: relative;
+                z-index: 2;
+            }
+
+            .top-wrap {
+                width: 100%;
+                max-width: 1000px;
+                margin: 12px auto;
+                display: flex;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            #content {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .page {
+                width: 100%;
+                height: auto;
+                overflow: hidden;
+            }
+
+
+            .img-2,
+            .img-3,
+            .img-0,
+            #in {
+                width: 100%;
+                height: auto;
+            }
+
+            .info {
+                margin: 12px;
+                border: 3px solid #49bcd3;
+                background: #fff;
+                padding: 12px;
+                position: relative;
+                max-width: 780px;
+                margin: 12px auto;
+                width: 100%;
+                height: auto;
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px 15px;
+            }
+
+            .item {
+                font-size: 13px;
+                color: #666;
+            }
+
+            .item b {
+                display: block;
+                color: #7A7A7A;
+                font-weight: 500;
+                font-family: Times New Roman;
+            }
+
+            .value {
+                color: #1e88e5;
+                font-weight: 700;
+                margin-top: 2px;
+                font-family: Times New Roman;
+            }
+
+            .header {
+                position: relative;
+                top: 0;
+                background: #fff;
+                padding: 14px 0;
+                text-align: center;
+                border-bottom: 1px solid #e5e5e5;
+                width: 100%;
+            }
+
+            .pdf {
+                position: absolute;
+                right: 12px;
+                top: 12px;
+                background: #e53935;
+                color: #fff;
+                border: none;
+                padding: 13px 16px;
+                border-radius: 6px;
+                font-size: 13px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .btn-group button:not(.pdf) {
+                display: none;
+            }
+
+
+            .left-menu {
+                display: none;
+            }
+
+
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="logo"><img src="logobv.jpg"></div>
+    </div>
+
+    <div class="top-wrap">
+
+        <div class="left-menu">
+            <div class="menu-box">메뉴</div>
+            <div class="menu-box">특수검진</div>
+        </div>
+
+        <!-- INFO -->
+        <div class="info">
+            <div class="grid">
+                <div class="item inline-item">
+                    <b>성명(Name) :</b>
+                    <span class="value">풍테황</span>
+                </div>
+
+                <div class="item inline-item">
+                    <b>생년월일(Birth)</b>
+                    <span class="value">20010823</span>
+                </div>
+
+                <div class="item block-item">
+                    <b>나이/성별(Age/Sex)</b>
+                    <span class="value">25 / 남</span>
+                </div>
+
+                <div class="item block-item">
+                    <b>검진일(Exam Date)</b>
+                    <span class="value">2026년 02월 02일</span>
+                </div>
+
+                <div class="item block-item">
+                    <b>등록번호(Chart No.)</b>
+                    <span class="value">88152710</span>
+                </div>
+                <!-- BUTTON -->
+
+
+            </div>
+            <div class="btn-group ">
+                <button onclick="window.print()">현재페이지 출력</button>
+                <button onclick="window.print()" data-print-all="true">전체페이지 출력</button>
+                <button class="pdf" onclick="savePDF()">PDF 저장</button>
+            </div>
+
+        </div>
+
+    </div>
+    <div id="content">
+
+        <div class="container">
+
+            <div class="page page-break">
+                <img src="hoang1.png" class="img-2">
+            </div>
+
+            <div class="page page-break overlap">
+                <img src="hoang2.png" class="img-0">
+            </div>
+
+            <div class="page">
+                <img src="anh3.png" class="img-3">
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+<script>
+    const token =
+        '/rs03/2026/RST/RST_Controller2.asp?part=view&p=A878672AD8C6CEBC5E31DD302B6B52D5BFB734F44C00EBA7D1E6525E9E12888F&jubsuDate=20260202';
+
+    history.replaceState({}, '', '/' + token);
+    function savePDF() {
+        const btn = document.querySelector(".pdf");
+        btn.style.visibility = "hidden";
+
+        const images = document.querySelectorAll("img");
+
+        Promise.all([...images].map(img => {
+            if (img.complete) return Promise.resolve();
+            return new Promise(resolve => {
+                img.onload = img.onerror = resolve;
+            });
+        }))
+            .then(() => {
+                const element = document.getElementById("content");
+                element.classList.add("pdf-mode");
+                return html2pdf().set({
+                    margin: [0, 0, 0, 0],
+                    filename: '20260202풍테황.pdf',
+                    image: { type: 'jpeg', quality: 1 },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true
+                    },
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: 'portrait'
+                    }
+                }).from(element).save();
+            })
+            .catch(err => {
+                console.error("PDF lỗi:", err);
+                alert("Xuất PDF lỗi, mở Console để xem chi tiết");
+            })
+            .finally(() => {
+                btn.style.visibility = "visible";
+                document.getElementById("content")
+                    .classList.remove("pdf-mode");
+            });
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                document.getElementById("loader").style.display = "none";
+            }, 1000);
+        });
+
+    }
+
+
+</script>
+
+
+
+</html>
